@@ -155,7 +155,7 @@ internet connection, but you will have to write down the key fingerprint, which
 is a series of numbers and letters used to verify that you have the right key,
 and check it later.
 
-Tap on your key, if you havn't done so already. Press the menu icon ![&#x22ee;](img/openkeychain_menu_icon.png) in the top right of the screen. 
+Tap on your key, if you haven't done so already. Press the menu icon ![&#x22ee;](img/openkeychain_menu_icon.png) in the top right of the screen. 
 
 ![three dots in the top right corner](img/openkeychain_my_key_menu-1.png)
 
