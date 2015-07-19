@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encrypted e-mail on Android</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+        font-family: sans-serif;
+        margin: 1em;
+        max-width: 64em;
+        margin: auto;
+        padding: 0.8em;
+    }
+
+    a:visited {
+        color: #0082f1;
+    }
+
+    img {
+        zoom: 50%;
+        vertical-align: text-bottom;
+    }
+    img:-moz-broken{
+      -moz-force-broken-image-icon:1;
+      width:24px;
+      height:24px;
+    }
+
+    hr.big-and-invisible {
+        margin-bottom: 6em;
+        border: 0;
+    }
+
+    @media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2),
+           (min-resolution: 192dpi){
+    body{
+        font-size: 3em;
+    }
+
+    img {
+        zoom: 50%;
+    }
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function() {
+        //Firefox does not support zoom!
+        if (window.devicePixelRatio <= 1) {
+            var images = document.getElementsByTagName("img");
+            
+            for (var i = 0; i < images.length; i++) {
+                var img = images[i];
+                
+                if (img.style.zoom !== undefined) {
+                    //Browser supports zoom
+                    break;
+                }
+
+                img.style.width = img.clientWidth/2+"px";
+            }
+        }
+    };
+  </script>
+</head>
+<body>
