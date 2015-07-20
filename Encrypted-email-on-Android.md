@@ -283,3 +283,21 @@ Make sure you filled out both the address and password fields, and that the
 address is valid. Make sure there's no space at the end of the address.
 
 [Back to guide](#email-problems)
+
+## Feedback <a name="feedback"></a> ##
+
+If a part of this guide was confusing, if you ran into problems that aren't in
+the troubleshooting section, or if you you just want to drop me a line, my
+email address is **philippe.latulippe at gmail.com**
+
+I'd love to hear about your experiences while using this guide.
+
+If you got far enough in the guide, you can even send me an encrypted e-mail!
+Launch OpenKeychain, tap the plus button ![+](img/openkeychain_green_plus_button.png) in the bottom right corner of the screen, then tap "Search Cloud". From
+there, you can search for my key by typing my e-mail address, or by copy and
+pasting my key fingerprint, 0x12E9B4014345998C . You don't have to do this
+though. You won't be able to verify that you are really using my key.
+
+## Contribute ##
+
+[This guide is on GitHub](https://github.com/philippelatulippe/Encrypted-email-on-Android). Feel free to fork it, open issues or send patches.
