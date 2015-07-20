@@ -13,7 +13,7 @@ screen of a mobile device. The screenshots are present to help the reader
 locate specific buttons, or to reassure the reader that they're in the right
 place.
 
-It was a troubleshooting section. Currently, it is entirely dedicated to
+It has a troubleshooting section. Currently, it is entirely dedicated to
 setting up K-9 mail, whose set-up wizard needs an overhaul.
 
 The most complicated part of the guide is the key exchange, which require the
