@@ -3,7 +3,7 @@
 Sending and receiving encrypted emails on Android isn't hard. Here's how to do
 it!
 
-## Download the applications ##
+## Download the applications <a name="start"></a> ##
 
 First, we need to download two apps:
 
@@ -74,7 +74,7 @@ OpenKeychain and has internet access, you can use the following method.
 
 If this method isn't suitable for you, here are some alternatives:
 
-* [We don't have internet access](#key_exchange_NFC)
+* [We don't have internet access](#key_exchange_nfc)
 * [The other person doesn't use OpenKeychain](#key_exchange_email)
 
 Press the share button ![](img/openkeychain_share_icon.png) next to your key. The other person should do the same.
@@ -107,7 +107,7 @@ then tapping the NFC icon ![NFC icon](img/openkeychain_nfc_share_icon.png).
 ![screenshot](img/openkeychain_my_key_nfc.png)
 
 If you or the other person see the error "This device does not support NFC" at
-the bottom of the screen, then [try the next method](#key_exchange_by_email). 
+the bottom of the screen, then [try the next method](#key_exchange_email). 
 
 You might get an error message at the bottom of the screen telling you to
 enable NFC or Android Beam. Tap the button to the right of that message to go
@@ -120,7 +120,7 @@ more in a different angle, again with the phones back to back.
 ![Now we're in SPACE! "Tap another device to complete", it says.](img/android_beam_key.png)
 
 If that works, [head to the next step](#send_email). If you can't get NFC to
-work, try the method below if you have synchronized your key with the cloud, or the [method after that](#key_exchange_by_email) if you haven't.
+work, try the method below if you have synchronized your key with the cloud, or the [method after that](#key_exchange_email) if you haven't.
 
 <!--TODO: How will they know if it worked? Is there a confirmation message or do they need to go through their key list?-->
 
@@ -147,7 +147,7 @@ Now follow these steps again, but scan your phone this time. Once you're done,
 [head to the next step](#send_email). If you can't get it to scan, try the
 method below.
 
-### Send keys by email <a name="key_exchange_by_email"></a>###
+### Send keys by email <a name="key_exchange_email"></a>###
 
 If your phone does not have NFC and you do not want to send your key to the
 cloud, you can e-mail your keys to each other. This also works without an
@@ -190,7 +190,7 @@ the key you just received by email and open it.
 
 If you're not connected to the internet and received the key later, and the
 other person is no longer next to you, [then proceed to the next
-step](#key_exchange_by_email_manual_verification).
+step](#key_exchange_email_manual_verification).
 
 If the person who sent you the key is next to you, hit the blue button to
 verify the key. The other person should tap on the QR code of their key. Scan
@@ -203,7 +203,7 @@ Once the other person has received your key, they should do the same.
 
 You are now ready to send e-mail. [Proceed to the next step](#send_email).
 
-<a name="key_exchange_by_email_manual_verification"></a>If you are away from
+<a name="key_exchange_email_manual_verification"></a>If you are away from
 the person who sent you the key, get the fingerprint you wrote down. On the
 screen for their key, open the menu ![&#x22ee;](img/openkeychain_menu_icon_orange.png).
 
@@ -297,6 +297,8 @@ Launch OpenKeychain, tap the plus button ![+](img/openkeychain_green_plus_button
 there, you can search for my key by typing my e-mail address, or by copy and
 pasting my key fingerprint, 0x12E9B4014345998C . You don't have to do this
 though. You won't be able to verify that you are really using my key.
+
+[Back to guide](#start)
 
 ## Contribute ##
 
