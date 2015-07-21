@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encrypted e-mail on Android</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+        font-family: sans-serif;
+        margin: 1em;
+        max-width: 64em;
+        margin: auto;
+        padding: 0.8em;
+    }
+
+    a:visited {
+        color: #0082f1;
+    }
+
+    img {
+        zoom: 50%;
+        vertical-align: text-bottom;
+    }
+    img:-moz-broken{
+      -moz-force-broken-image-icon:1;
+      width:24px;
+      height:24px;
+    }
+
+    hr.big-and-invisible {
+        margin-bottom: 6em;
+        border: 0;
+    }
+
+    .feedback {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px;
+    }
+
+    @media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2),
+           (min-resolution: 192dpi){
+    body{
+        font-size: 3em;
+    }
+
+    img {
+        zoom: 50%;
+    }
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function() {
+        //Firefox does not support zoom!
+        if (window.devicePixelRatio <= 1) {
+            var images = document.getElementsByTagName("img");
+            
+            for (var i = 0; i < images.length; i++) {
+                var img = images[i];
+                
+                if (img.style.zoom !== undefined) {
+                    //Browser supports zoom
+                    break;
+                }
+
+                img.style.width = img.clientWidth/2+"px";
+            }
+        }
+    };
+  </script>
+</head>
+<body>
+<div class="feedback"><a href="#feedback">Feedback</a></div>
+<h1>Encrypted e-mail on Android</h1>
+
+<p>Sending and receiving encrypted emails on Android isn't hard. Here's how to do
+it!</p>
+
+<h2>Download the applications <a name="start"></a></h2>
+
+<p>First, we need to download two apps:</p>
+
+<ul>
+<li><a href="https://play.google.com/store/apps/details?id=org.sufficientlysecure.keychain">OpenKeychain</a>, the app that does the actual encryption. Apart from the 
+set-up, it mostly works in the background.</li>
+<li><a href="https://play.google.com/store/apps/details?id=com.fsck.k9">K-9 Mail</a>, an e-mail app that supports encryption.</li>
+</ul>
+
+<p>Now launch K-9 mail.</p>
+
+<h2>Set-up email <a name="email"></a></h2>
+
+<p>Simply enter your e-mail address and password, the rest should be done
+automatically.</p>
+
+<p><img src="img/K-9_mail_account_setup.png" alt="K-9 mail set-up" title="" /></p>
+
+<p>Potential problems: <a name="email-problems"></a></p>
+
+<ul>
+<li><a href="#what_kind_of_account">I am asked "What kind of account is this?"</a></li>
+<li><a href="#2FA">My gmail account has 2-step verification</a></li>
+<li><a href="#add_new_account_manual">I don't see a screen called "Set up a new account"</a></li>
+<li><a href="#wizard_is_dead">I accidentally closed K-9 Mail while setting up</a></li>
+<li><a href="#next_is_grey">I can't click "Next"</a></li>
+</ul>
+
+<p>Now we need to enable encryption in K-9 Mail. Tap on your account, then press
+the menu icon <img src="img/android_menu_icon.png" alt="&#x22ee;" title="" /> in the bottom right of the
+screen. Select "Settings", then "Account settings". Scroll to the bottom of the
+list and select "Cryptography". Touch "OpenPGP Provider" and select
+"OpenKeychain" from the list.</p>
+
+<h2>Set-up encryption <a name="openkeychain"></a></h2>
+
+<p>First, we need to create a pair of keys. One key, called the secret key, will
+let you decrypt messages sent to you, and the other one, called the public key,
+will let people encrypt messages to you.</p>
+
+<p>Launch OpenKeychain, then select "Create my key". Follow the steps on the
+screen.</p>
+
+<p>Potential problem: <a href="#troubleshooting_create_key_manual">I don't see the screen below when I launch OpenKeychain</a></p>
+
+<p><img src="img/openkeychain-create-key-1.png" alt="OpenKeychain set-up screen" title="" /></p>
+
+<p>Make sure you choose a strong password. The password will encrypt the key which
+you will use to decrypt your email. If your secret key were to fall in the
+wrong hands, that password will stop them from reading all the messages you
+sent.  But if you use a weak password, then they could find it by trying every
+possible combination until they find the right one. Using software, this can be
+done very quickly.</p>
+
+<p>Don't forget this password, there is no way to reset it, as it is not stored
+anywhere.</p>
+
+<p>Once you've entered your information you will see this screen.</p>
+
+<p><img src="img/openkeychain-create-key-3.png" alt="OpenKeychain key creation" title="" /></p>
+
+<p>Important: If you do not uncheck "Synchronize with the cloud", then the fact
+that you use email encryption will be made public. The advantage of
+synchronizing with the cloud is that other people who use encryption will know
+to send encrypted messages to you, and it will be much easier for them to do
+so. However, even if you to not check this option, someone spying on your
+messages will know that you use email encryption anyway.</p>
+
+<h2>Exchanging keys</h2>
+
+<p>To send someone an encrypted email, you must first download their public key
+into your keychain, and then verify that it is the correct key. The best way to
+do that is to meet the person face-to-face. If the other person also uses
+OpenKeychain and has internet access, you can use the following method.</p>
+
+<p>If this method isn't suitable for you, here are some alternatives:</p>
+
+<ul>
+<li><a href="#key_exchange_nfc">We don't have internet access</a></li>
+<li><a href="#key_exchange_email">The other person doesn't use OpenKeychain</a></li>
+</ul>
+
+<p>Press the share button <img src="img/openkeychain_share_icon.png" alt="" title="" /> next to your key. The other person should do the same.</p>
+
+<p><img src="img/openkeychain-keylist-share.png" alt="The share button is on the right side of the screen, next to your key in the list of keys" title="" /></p>
+
+<p>Follow the instructions on the screen. You'll be asked how many people are
+exchanging keys, since this method lets multiple people exchange keys at the
+same time. If it's just you and another person, you can touch "Start exchange".</p>
+
+<p>In the next step,you'll want to put your phones side by side and see which
+is the lowest number, then type that number in. </p>
+
+<p>In the last step, you'll be asked to verify that you have the right key by
+picking the phrase that both your phones have in common</p>
+
+<p><img src="img/keyslinger-3.png" alt="Pick the phrase that matches one of the phrases on the other phone" title="" /></p>
+
+<!-- TODO: make it obvious with a screenshot of the other phone -->
+
+<p>If that works, <a href="#send_email">skip to the next step</a>. If it doesn't, try the method below.</p>
+
+<h3>Exchange keys using NFC <a name="key_exchange_nfc"></a></h3>
+
+<p>This method works if the person with whom you're trying to exchange keys has a
+phone that supports NFC. You can check if your phone does by tapping your key,
+then tapping the NFC icon <img src="img/openkeychain_nfc_share_icon.png" alt="NFC icon" title="" />.</p>
+
+<p><img src="img/openkeychain_my_key_nfc.png" alt="screenshot" title="" /></p>
+
+<p>If you or the other person see the error "This device does not support NFC" at
+the bottom of the screen, then <a href="#key_exchange_email">try the next method</a>. </p>
+
+<p>You might get an error message at the bottom of the screen telling you to
+enable NFC or Android Beam. Tap the button to the right of that message to go
+to the settings, where you can turn it on.</p>
+
+<p>Once both your phones are ready to transmit, touch the back of the phones
+together and hold them there for a few seconds. If nothing happens, try once
+more in a different angle, again with the phones back to back.</p>
+
+<p><img src="img/android_beam_key.png" alt="Now we're in SPACE! &quot;Tap another device to complete&quot;, it says." title="" /></p>
+
+<p>If that works, <a href="#send_email">head to the next step</a>. If you can't get NFC to
+work, try the method below if you have synchronized your key with the cloud, or the <a href="#key_exchange_email">method after that</a> if you haven't.</p>
+
+<!--TODO: How will they know if it worked? Is there a confirmation message or do they need to go through their key list?-->
+
+<h3>Download keys from the cloud</h3>
+
+<p>If you checked "Synchronize with the cloud" when creating your key, and have an
+internet connection, you can exchange keys by scanning a QR code on each
+other's phones. If you haven't already done so, tap on your key in the list of
+keys, under "My Keys". Then tap on the QR code on the right side of the screen.</p>
+
+<p><img src="img/openkeychain_my_key_qr_code.png" alt="Tap the QR code" title="" /></p>
+
+<p>On the other phone, hit the plus button
+<img src="img/openkeychain_green_plus_button.png" alt="+" title="" /> at the bottom right of the screen
+and select "Scan QR Code". Then hold that phone in front of the QR code for a
+few seconds. If nothing happens, turn up the brightness on the phone displaying
+the QR code.</p>
+
+<p><img src="img/openkeychain_scan_qr_code_menu.png" alt="First hit the green plus button, then &quot;Scan QR Code&quot;" title="" /></p>
+
+<!-- TODO: You need a section for signing the key, and links to this section-->
+
+<p>Now follow these steps again, but scan your phone this time. Once you're done,
+<a href="#send_email">head to the next step</a>. If you can't get it to scan, try the
+method below.</p>
+
+<h3>Send keys by email <a name="key_exchange_email"></a></h3>
+
+<p>If your phone does not have NFC and you do not want to send your key to the
+cloud, you can e-mail your keys to each other. This also works without an
+internet connection, but you will have to write down the key fingerprint, which
+is a series of numbers and letters used to verify that you have the right key,
+and check it later.</p>
+
+<p>Tap on your key, if you haven't done so already. Press the menu icon <img src="img/openkeychain_menu_icon.png" alt="&#x22ee;" title="" /> in the top right of the screen. </p>
+
+<p><img src="img/openkeychain_my_key_menu-1.png" alt="three dots in the top right corner" title="" /></p>
+
+<p>From the menu, select "Extended information". In the next screen, touch "share
+with...", and select K-9 Mail from the list. You might have to scroll down to
+find K-9 Mail. </p>
+
+<p><img src="img/openkeychain_my_key_extended_share.png" alt="The share button is at the bottom left of this screen" title="" /></p>
+
+<p>You'll now get the chance to send your first e-mail with K-9 Mail! Don't check
+"encrypt" just now, since you don't have the other person's encryption key yet.</p>
+
+<p>If you don't have an internet connection, you can still send the e-mail. It
+will get sent once you're back online. </p>
+
+<p>One you've received the email, tap "Show attachments", and the open the
+attachment with OpenKeychain.</p>
+
+<p><img src="img/k9_receive_key.png" alt="&quot;Show Attachments&quot; button, in the top right corner of the message" title="" /></p>
+
+<p><img src="img/k9_open_received_key.png" alt="Select &quot;Import Key with OpenKeychain&quot;" title="" /></p>
+
+<p>Tap "Import selected keys" at the bottom of the screen. Exit this screen, then
+go back into OpenKeychain. <!-- This is very weird for the user: it looks like
+they are in OpenKeychain, but they are actually in an OpenKeychain Intent
+inside of K-9 mail. They need to go to the program list and into
+OpenKeychain. How to explain this? --></p>
+
+<p>In OpenKeychain, go back to the main screen, where the list of keys is. Find
+the key you just received by email and open it.</p>
+
+<p>If you're not connected to the internet and received the key later, and the
+other person is no longer next to you, <a href="#key_exchange_email_manual_verification">then proceed to the next
+step</a>.</p>
+
+<p>If the person who sent you the key is next to you, hit the blue button to
+verify the key. The other person should tap on the QR code of their key. Scan
+the QR code with your camera. If nothing happens, turn up the brightness on the
+phone displaying the QR code.</p>
+
+<p><img src="img/openkeychain_other_key_qr_button.png" alt="Tap the blue button on the right side of the screen" title="" /></p>
+
+<p>Once the other person has received your key, they should do the same.</p>
+
+<p>You are now ready to send e-mail. <a href="#send_email">Proceed to the next step</a>.</p>
+
+<p><a name="key_exchange_email_manual_verification"></a>If you are away from
+the person who sent you the key, get the fingerprint you wrote down. On the
+screen for their key, open the menu <img src="img/openkeychain_menu_icon_orange.png" alt="&#x22ee;" title="" />.</p>
+
+<p><img src="img/openkeychain_unconfirmed_key_menu-1.png" alt="Press the button in the upper right corner of the screen" title="" /></p>
+
+<p>From that menu icon, select "Confirm via fingerprint comparison". If the
+colourful letters and numbers on the screen match the ones you wrote down, then
+tap "Fingerprints match".</p>
+
+<h2>Send an e-mail <a name="send_email"></a></h2>
+
+<p>Open The K-9 Mail application, and tap the new message icon <img src="img/k9-new-message-icon.png" alt="envelope with plus sign" title="" /> on the bottom bar.</p>
+
+<p><img src="img/k9-create-new-message.png" alt="An envelope with a plus sign on the bottom bar" title="" /></p>
+
+<p>First, check the boxes "Sign" and "Encrypt", then compose your message as you
+normally would.</p>
+
+<p><img src="img/k9-compose-screen-all-checked.png" alt="check all checkboxes on the Compose screen" title="" /></p>
+
+<p>Potential problem: <a href="#troubleshooting-k9-turn-on-encryption">I don't see the checkboxes</a></p>
+
+<p><strong>That's it! You're done!</strong></p>
+
+<hr class="big-and-invisible">
+
+<h2>Troubleshooting</h2>
+
+<h3>Setting up K-9 mail</h3>
+
+<h4><a name="what_kind_of_account"></a> I am asked "What kind of account is this?"</h4>
+
+<p>The automated setup doesn't know about your email provider. Go in the help
+section of your email provider and search for its "IMAP server settings". If
+you find them, select "IMAP" in K-9 mail, and fill out the form with the 
+information they provide.</p>
+
+<p>If you can't find information on IMAP settings, then your email provider only
+supports POP3. Search for your provider's POP3 settings.</p>
+
+<p><a href="#email-problems">Back to guide</a></p>
+
+<h4><a name="2FA"></a> My gmail account has 2-step verification</h4>
+
+<ol>
+<li>Visit your <a href="https://security.google.com/settings/security/apppasswords">App passwords</a> page.</li>
+<li>At the bottom, click <em>Select app</em> and choose "Other (Custom name)".</li>
+<li>Click <em>Select device</em> and choose the device you’re using.</li>
+<li>Select <em>Generate</em>.</li>
+<li>Enter the App password (the 16 character code in the yellow bar) in the
+K-9 Mail set-up</li>
+</ol>
+
+<!-- TODO: show a screenshot with the error message caused by 2FA -->
+
+<p><a href="#email-problems">Back to guide</a></p>
+
+<h4>I don't see a screen called "Set up a new account" <a name="add_new_account_manual"></a></h4>
+
+<p>Go to the account list by pressing the left-pointing arrow in the top left
+corner of the screen, next to the K-9 mascot. Press it a second time.</p>
+
+<p><img src="img/troubleshooting-delete-account-1.png" alt="Screenshot: go up" title="" /></p>
+
+<p>Then press on the + button on the bar at the bottom.</p>
+
+<p><img src="img/troubleshooting-create-account-button.png" alt="Screenshot: go up" title="" /></p>
+
+<h4><a name="wizard_is_dead"></a> I accidentally closed K-9 Mail while setting up</h4>
+
+<p>You'll have to delete the account you've started setting up. First, go to the
+account list by pressing the left-pointing arrow in the top left corner of the
+screen, next to the K-9 mascot. Press it a second time.</p>
+
+<p><img src="img/troubleshooting-delete-account-1.png" alt="Screenshot: go up" title="" /></p>
+
+<p>Touch on the account and hold  your finger on it. A menu will appear</p>
+
+<p><img src="img/troubleshooting-delete-account-2.png" alt="Screenshot: select account" title="" /></p>
+
+<p>Touch "Remove account"</p>
+
+<p><img src="img/troubleshooting-delete-account-3.png" alt="Screenshot: Menu with remove account highlighted" title="" /></p>
+
+<p>Now when you restart K-9 mail, the wizard will start again.</p>
+
+<p><a href="#email-problems">Back to guide</a></p>
+
+<h4><a name="next_is_grey"></a> I can't click "Next"</h4>
+
+<p>Make sure you filled out both the address and password fields, and that the 
+address is valid. Make sure there's no space at the end of the address.</p>
+
+<p><a href="#email-problems">Back to guide</a></p>
+
+<h3>OpenKeychain</h3>
+
+<h4>I don't see "create key" when I launch OpenKeychain <a name="troubleshooting_create_key_manual"></a></h4>
+
+<p>Tap the menu icon <img src="img/openkeychain_menu_icon.png" alt="&#x22ee;" title="" /> in the top right
+corner of the scren.</p>
+
+<p><img src="img/openkeychain-keylist-menu-icon.png" alt="three dots in the top right corner" title="" /></p>
+
+<p>From the menu that pops up, select "Manage my keys".</p>
+
+<p><a href="#openkeychain">Back to guide</a></p>
+
+<h3>Sending an encrypted e-mail</h3>
+
+<h4>I don't see the checkboxes with "Sign" and "Encrypt" when I compose a message <a name="troubleshooting-k9-turn-on-encryption"></a></h4>
+
+<p>You'll need to enable encryption in K-9 mail. Tap the back button and go back
+to your inbox, then press the menu icon <img src="img/android_menu_icon.png" alt="&#x22ee;" title="" />
+in the bottom right of the screen. Select "Settings" from the menu that appear,
+then "Account settings" from the next menu. Scroll to the bottom of the list
+and select "Cryptography". Touch "OpenPGP Provider" and select "OpenKeychain"
+from the list.</p>
+
+<p><a href="#send_email">Back to guide</a></p>
+
+<h2>Feedback <a name="feedback"></a></h2>
+
+<p>If a part of this guide was confusing, if you ran into problems that aren't in
+the troubleshooting section, or if you you just want to drop me a line, my
+email address is <strong>philippe.latulippe at gmail.com</strong></p>
+
+<p>I'd love to hear about your experiences while using this guide.</p>
+
+<p>If you got far enough in the guide, you can even send me an encrypted e-mail!
+Launch OpenKeychain, tap the plus button <img src="img/openkeychain_green_plus_button.png" alt="+" title="" /> in the bottom right corner of the screen, then tap "Search Cloud". From
+there, you can search for my key by typing my e-mail address, or by copy and
+pasting my key fingerprint, 0x12E9B4014345998C . You don't have to do this
+though. You won't be able to verify that you are really using my key.</p>
+
+<p><a href="#start">Back to guide</a></p>
+
+<h2>Contribute</h2>
+
+<p><a href="https://github.com/philippelatulippe/Encrypted-email-on-Android">This guide is on GitHub</a>. Feel free to fork it, open issues or send patches.</p>
+</body>
+</html>
