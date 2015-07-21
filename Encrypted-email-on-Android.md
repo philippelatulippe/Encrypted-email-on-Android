@@ -24,6 +24,7 @@ Potential problems: <a name="email-problems"></a>
 
 * [I am asked "What kind of account is this?"](#what_kind_of_account)
 * [My gmail account has 2-step verification](#2FA)
+* [I don't see a screen called "Set up a new account"](#add_new_account_manual)
 * [I accidentally closed K-9 Mail while setting up](#wizard_is_dead)
 * [I can't click "Next"](#next_is_grey)
 
@@ -41,6 +42,8 @@ will let people encrypt messages to you.
 
 Launch OpenKeychain, then select "Create my key". Follow the steps on the
 screen.
+
+Potential problem: [I don't see the screen below when I launch OpenKeychain](#troubleshooting_create_key_manual)
 
 ![OpenKeychain set-up screen](img/openkeychain-create-key-1.png)
 
@@ -224,7 +227,7 @@ normally would.
 
 ![check all checkboxes on the Compose screen](img/k9-compose-screen-all-checked.png)
 
-<!-- TODO: troubleshooting for when the checkboxes are missing -->
+Potential problem: [I don't see the checkboxes](#troubleshooting-k9-turn-on-encryption)
 
 **That's it! You're done!**
 
@@ -254,9 +257,20 @@ supports POP3. Search for your provider's POP3 settings.
 5. Enter the App password (the 16 character code in the yellow bar) in the
    K-9 Mail set-up
 
-TODO: show a screenshot with the error message caused by 2FA
+<!-- TODO: show a screenshot with the error message caused by 2FA -->
 
 [Back to guide](#email-problems)
+
+#### I don't see a screen called "Set up a new account" <a name="add_new_account_manual"></a> ####
+
+Go to the account list by pressing the left-pointing arrow in the top left
+corner of the screen, next to the K-9 mascot. Press it a second time.
+
+![Screenshot: go up](img/troubleshooting-delete-account-1.png)
+
+Then press on the + button on the bar at the bottom.
+
+![Screenshot: go up](img/troubleshooting-create-account-button.png)
 
 #### <a name="wizard_is_dead"></a> I accidentally closed K-9 Mail while setting up ####
 
@@ -283,6 +297,32 @@ Make sure you filled out both the address and password fields, and that the
 address is valid. Make sure there's no space at the end of the address.
 
 [Back to guide](#email-problems)
+
+### OpenKeychain ###
+
+#### I don't see "create key" when I launch OpenKeychain <a name="troubleshooting_create_key_manual"></a> ####
+
+Tap the menu icon ![&#x22ee;](img/openkeychain_menu_icon.png) in the top right
+corner of the scren.
+
+![three dots in the top right corner](img/openkeychain-keylist-menu-icon.png)
+
+From the menu that pops up, select "Manage my keys".
+
+[Back to guide](#openkeychain)
+
+### Sending an encrypted e-mail ###
+
+#### I don't see the checkboxes with "Sign" and "Encrypt" when I compose a message <a name="troubleshooting-k9-turn-on-encryption"></a> ####
+
+You'll need to enable encryption in K-9 mail. Tap the back button and go back
+to your inbox, then press the menu icon ![&#x22ee;](img/android_menu_icon.png)
+in the bottom right of the screen. Select "Settings" from the menu that appear,
+then "Account settings" from the next menu. Scroll to the bottom of the list
+and select "Cryptography". Touch "OpenPGP Provider" and select "OpenKeychain"
+from the list.
+
+[Back to guide](#send_email)
 
 ## Feedback <a name="feedback"></a> ##
 
