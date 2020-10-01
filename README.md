@@ -2,10 +2,10 @@
 
 [Read the guide here](http://www.zone42.ca/~philippe/Encrypted-email-on-Android/Encrypted-email-on-Android.html)
 
-This is a non-technical guide to to help two people set up PGP on their Android
+This is a non-technical guide, to help two people set up PGP on their Android
 devices. It uses OpenKeychain and K-9 mail. I call it a field guide, intended
 to be followed while meeting with someone else. Therefore, it contains minimal
-explanation of concepts.
+explanation of concepts and better to understand.
 
 It does assume some technical savvy, and doesn't include screenshots for every
 step. This would make the guide too tedious to follow, specially from the small
